@@ -55,7 +55,9 @@ fn get_hash(p: CurvePoint, q: CurvePoint) -> Scalar {
 }
 
 fn verify(proof: Proof) -> bool {
-    let actual: CurvePoint = CurvePoint::prime_subgroup_generator().mul(proof.pi).into_affine();
+    let actual: CurvePoint = CurvePoint::prime_subgroup_generator()
+        .mul(proof.pi)
+        .into_affine();
     let alpha: Scalar = get_hash(proof.r_com, proof.v_com);
     let mult = proof.r_com.mul(alpha).into_affine();
     let expected: CurvePoint = proof.v_com + mult;
